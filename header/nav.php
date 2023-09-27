@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -42,8 +44,18 @@
 	         
 	          <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
 	          <li class="nav-item cart"><a href="cart.php" class="nav-link"><span class="icon icon-shopping_cart"></span></a>
-			  <li class="nav-item"><a href="login.php" class="nav-link">login</a></li>
-			  <li class="nav-item"><a href="register.php" class="nav-link">register</a></li>
+            <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Logout</a></li>
+          </ul>
+        </li>
+			      <li class="nav-item"><a href="login.php" class="nav-link">login</a></li>
+			      <li class="nav-item"><a href="register.php" class="nav-link">register</a></li>
 	        </ul>
 	      </div>
 		</div>

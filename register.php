@@ -2,24 +2,45 @@
 <?php include "config/config.php" ?>
 
 <?php
+	$fetch_registered_user = "SELECT * FROM `register_user`";
+	$fetch_registered_prepare = $connection->prepare($fetch_registered_user);
+	$fetch_registered_prepare->execute();
+	$registered_user_data = $fetch_registered_prepare->fetchAll(PDO::FETCH_ASSOC);
+	// print_r($registered_user_data);
+
 	if(isset($_POST['submit'])){
 		$username = $_POST['username'];
 		$email = $_POST['email'];
 		$password = $_POST['password'];
-		$hash_password = password_hash($password, PASSWORD_BCRYPT);
 
-		// echo "<script>alert('hello')</script>";
+		$isEmailNotExist = false;
 
-		$register_user_querry = "INSERT INTO `register_user`(`user_name`, `user_email`, `user_password`) VALUES (:username, :email, :password)";
-
-		$register_user_querry_prepare = $connection->prepare($register_user_querry);
-		$register_user_querry_prepare->bindParam(':username', $username);
-		$register_user_querry_prepare->bindParam(':email', $email);
-		$register_user_querry_prepare->bindParam(':password', $hash_password);
-		$register_user_querry_prepare->execute();
+		if(empty($username) || empty($email) || empty($password)){
+			echo "<script>alert('Kindly fill all the fields')</script>";
+		}else{
+			foreach($registered_user_data as $user){
+				if($email === $user['user_email']){
+					echo "<script>alert('Your email already in use')</script>";
+					return;
+				}else{
+					$isEmailNotExist = true;
+				}
+			}
+			if($isEmailNotExist){
+				$hash_password = password_hash($password, PASSWORD_BCRYPT);
+		
+				// echo "<script>alert('hello')</script>";
+		
+				$register_user_querry = "INSERT INTO `register_user`(`user_name`, `user_email`, `user_password`) VALUES (:username, :email, :password)";
+				$register_user_querry_prepare = $connection->prepare($register_user_querry);
+				$register_user_querry_prepare->bindParam(':username', $username);
+				$register_user_querry_prepare->bindParam(':email', $email);
+				$register_user_querry_prepare->bindParam(':password', $hash_password);
+				$register_user_querry_prepare->execute();
+			}
+		}
 	}
 ?>
-
     <section class="home-slider owl-carousel">
       <div class="slider-item" style="background-image: url(images/bg_2.jpg);" data-stellar-background-ratio="0.5">
       	<div class="overlay"></div>
@@ -71,7 +92,6 @@
 					</div>
                 </div>
 
-               
 	          </form><!-- END -->
           </div> <!-- .col-md-8 -->
           </div>
@@ -96,9 +116,7 @@
 		            
 		            $('#quantity').val(quantity + 1);
 
-		          
 		            // Increment
-		        
 		    });
 
 		     $('.quantity-left-minus').click(function(e){
@@ -113,11 +131,8 @@
 		            if(quantity>0){
 		            $('#quantity').val(quantity - 1);
 		            }
-		    });
-		    
+		    });   
 		});
-	</script>
-
-    
+	</script>  
   </body>
 </html>

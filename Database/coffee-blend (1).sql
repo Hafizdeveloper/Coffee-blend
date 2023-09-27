@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2023 at 03:41 PM
+-- Generation Time: Sep 27, 2023 at 03:47 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -40,7 +40,13 @@ CREATE TABLE `register_user` (
 --
 
 INSERT INTO `register_user` (`user_id`, `user_name`, `user_email`, `user_password`, `created_at`) VALUES
-(2, 'gtwuie6rthwj', 'bsjtfg@gmail.com', '$2y$10$q.nlpBKOsDZZJk0nuXVPieaSf0FovLEGnXZuvI/biJy2wCvb9.tom', '2023-09-25 13:26:14');
+(1, 'Zarrar', 'Zarrar@gmail.com', '$2y$10$GdDNDYCSeyH4pn7y7qRtaeSwkzQeLYY3T8lbgcYiJw/r.waRYUtQy', '2023-09-27 11:46:14'),
+(2, 'haseeb', 'haseeb@gmail.com', '$2y$10$PJ513CiBzADw4s8VCt6nbuIunN4EEXpKOXEyftTmoqy.JFruEjMGS', '2023-09-27 11:46:43'),
+(3, 'safdar', 'safdar@gmail.com', '$2y$10$omil5WNfD8A.aq4zJbsXJeiTIEJByWoAn4K0awsJpSx2nqMwxEDWG', '2023-09-27 11:55:09'),
+(4, 'zarrarmalik', 'Zarrarmalik@gmail.com', '$2y$10$lUSVmuWG/owhsMC91oJo8ueCku7mufnYN43PokL326y8NJ1RFoouq', '2023-09-27 12:04:21'),
+(12, 'zarrarmalik', 'Zarrarmalik@gmail.com', '$2y$10$Io5YsJECx3atN.snCVzUXOy8j1PhkOcWEG.uU9tO4WUdA5rhqVsXy', '2023-09-27 12:06:55'),
+(13, 'taihaam', 'taihaam@gmail.com', '$2y$10$zU63OqwFAG9V16jv8/dGruV/f/Qid9OY/q6KiCuwCv4dkYzWkcqNK', '2023-09-27 12:08:36'),
+(15, 'riaz', 'riaz@gmail.com', '$2y$10$/0RTBlpJTeeVsOXa7Wp/BenPs1Q6XUvSnlkKmw97A3nqHLtPZuugS', '2023-09-27 12:59:22');
 
 --
 -- Indexes for dumped tables
@@ -60,7 +66,7 @@ ALTER TABLE `register_user`
 -- AUTO_INCREMENT for table `register_user`
 --
 ALTER TABLE `register_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
