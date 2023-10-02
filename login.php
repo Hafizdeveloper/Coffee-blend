@@ -16,9 +16,9 @@
 
 		foreach($registered_user_data as $user_data){
 			if($user_data['user_email'] === $email && password_verify($password, $user_data['user_password'])){
-				$_SESSION['user_email'] = $user_data['user_id'];
-				$_SESSION['user_email'] = $user_data['user_name'];
-				$_SESSION['user_email'] = $user_data['user_email'];
+				$_SESSION['userId'] = $user_data['user_id'];
+				$_SESSION['userName'] = $user_data['user_name'];
+				$_SESSION['userEamil'] = $user_data['user_email'];
 				header("location:index.php");
 			}else{
 				$isLoginNotSuccessfull = true;
@@ -29,7 +29,6 @@
 		}
 	}
 ?>
-
     <section class="home-slider owl-carousel">
       <div class="slider-item" style="background-image: url(images/bg_1.jpg);" data-stellar-background-ratio="0.5">
       	<div class="overlay"></div>

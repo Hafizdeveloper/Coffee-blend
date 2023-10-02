@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2023 at 03:47 PM
+-- Generation Time: Oct 02, 2023 at 03:57 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -20,6 +20,23 @@ SET time_zone = "+00:00";
 --
 -- Database: `coffee-blend`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booking`
+--
+
+CREATE TABLE `booking` (
+  `booking_id` int(11) NOT NULL,
+  `first_name` varchar(200) NOT NULL,
+  `last_name` varchar(200) NOT NULL,
+  `date` varchar(200) NOT NULL,
+  `time` varchar(200) NOT NULL,
+  `phone` bigint(20) NOT NULL,
+  `message` text NOT NULL,
+  `registered_time` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -46,11 +63,18 @@ INSERT INTO `register_user` (`user_id`, `user_name`, `user_email`, `user_passwor
 (4, 'zarrarmalik', 'Zarrarmalik@gmail.com', '$2y$10$lUSVmuWG/owhsMC91oJo8ueCku7mufnYN43PokL326y8NJ1RFoouq', '2023-09-27 12:04:21'),
 (12, 'zarrarmalik', 'Zarrarmalik@gmail.com', '$2y$10$Io5YsJECx3atN.snCVzUXOy8j1PhkOcWEG.uU9tO4WUdA5rhqVsXy', '2023-09-27 12:06:55'),
 (13, 'taihaam', 'taihaam@gmail.com', '$2y$10$zU63OqwFAG9V16jv8/dGruV/f/Qid9OY/q6KiCuwCv4dkYzWkcqNK', '2023-09-27 12:08:36'),
-(15, 'riaz', 'riaz@gmail.com', '$2y$10$/0RTBlpJTeeVsOXa7Wp/BenPs1Q6XUvSnlkKmw97A3nqHLtPZuugS', '2023-09-27 12:59:22');
+(15, 'riaz', 'riaz@gmail.com', '$2y$10$/0RTBlpJTeeVsOXa7Wp/BenPs1Q6XUvSnlkKmw97A3nqHLtPZuugS', '2023-09-27 12:59:22'),
+(16, 'subhan', 'subhan@gmail.com', '$2y$10$8RTrjoVVH19RLWnkn25ihOXdMYLyJ4IAmxpCW2Ofcwq3rQC/pRJcK', '2023-10-02 12:45:58');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `booking`
+--
+ALTER TABLE `booking`
+  ADD PRIMARY KEY (`booking_id`);
 
 --
 -- Indexes for table `register_user`
@@ -63,10 +87,16 @@ ALTER TABLE `register_user`
 --
 
 --
+-- AUTO_INCREMENT for table `booking`
+--
+ALTER TABLE `booking`
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `register_user`
 --
 ALTER TABLE `register_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,4 +1,31 @@
-<?php include "header/nav.php"?>	
+<?php include "header/nav.php"?>
+<?php include "config/config.php" ?>
+<?php 
+	if(isset($_POST['book'])){
+		$firstName = $_POST['firstName'];
+		$lastName = $_POST['lastName'];
+		$date = $_POST['date'];
+		$time = $_POST['time'];
+		$phone = $_POST['phone'];
+		$message = $_POST['message'];
+
+		if(empty($firstName) || empty($lastName) || empty($date) || empty($time) || empty($phone) || empty($message)){
+			echo "<script>alert('Kindly fill all the fields')</script>";
+		}else{
+			$booking_query = "INSERT INTO `booking`(`first_name`, `last_name`, `date`, `time`, `phone`, `message`, `registered_time`) VALUES (:firstName, :lastName, :date, :time, :phone, :message)";
+			
+			$booking_prepare = $connection->prepare($booking_query);
+			$booking_prepare->bindParam(':firstName', $firstName);
+			$booking_prepare->bindParam(':firstName', $firstName);
+			$booking_prepare->bindParam(':firstName', $firstName);
+			$booking_prepare->bindParam(':firstName', $firstName);
+			$booking_prepare->bindParam(':firstName', $firstName);
+			$booking_prepare->bindParam(':firstName', $firstName);
+			$booking_prepare->bindParam(':firstName', $firstName);
+			$booking_prepare->bindParam(':firstName', $firstName);
+		}
+	}
+?>
 	
 	<section class="home-slider owl-carousel">
       <div class="slider-item" style="background-image: url(images/bg_1.jpg);">
@@ -74,38 +101,38 @@
 	    		</div>
 	    		<div class="book p-4">
 	    			<h3>Book a Table</h3>
-	    			<form action="#" class="appointment-form">
+	    			<form action="index.php" method="post" class="appointment-form">
 	    				<div class="d-md-flex">
 		    				<div class="form-group">
-		    					<input type="text" class="form-control" placeholder="First Name">
+		    					<input type="text" name="firstName" class="form-control" placeholder="First Name">
 		    				</div>
 		    				<div class="form-group ml-md-4">
-		    					<input type="text" class="form-control" placeholder="Last Name">
+		    					<input type="text" name="lastName" class="form-control" placeholder="Last Name">
 		    				</div>
 	    				</div>
 	    				<div class="d-md-flex">
 		    				<div class="form-group">
 		    					<div class="input-wrap">
 		            		<div class="icon"><span class="ion-md-calendar"></span></div>
-		            		<input type="text" class="form-control appointment_date" placeholder="Date">
+		            		<input type="text" name="date" class="form-control appointment_date" placeholder="Date">
 	            		</div>
 		    				</div>
 		    				<div class="form-group ml-md-4">
 		    					<div class="input-wrap">
 		            		<div class="icon"><span class="ion-ios-clock"></span></div>
-		            		<input type="text" class="form-control appointment_time" placeholder="Time">
+		            		<input type="text" name="time" class="form-control appointment_time" placeholder="Time">
 	            		</div>
 		    				</div>
 		    				<div class="form-group ml-md-4">
-		    					<input type="text" class="form-control" placeholder="Phone">
+		    					<input type="text" name="phone" class="form-control" placeholder="Phone">
 		    				</div>
 	    				</div>
 	    				<div class="d-md-flex">
 	    					<div class="form-group">
-		              <textarea name="" id="" cols="30" rows="2" class="form-control" placeholder="Message"></textarea>
+		              <textarea name="message" id="" cols="30" rows="2" class="form-control" placeholder="Message"></textarea>
 		            </div>
 		            <div class="form-group ml-md-4">
-		              <input type="submit" value="Appointment" class="btn btn-white py-3 px-4">
+		              <input type="submit" name="book" value="Appointment" class="btn btn-white py-3 px-4">
 		            </div>
 	    				</div>
 	    			</form>
