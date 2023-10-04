@@ -12,17 +12,21 @@
 		if(empty($firstName) || empty($lastName) || empty($date) || empty($time) || empty($phone) || empty($message)){
 			echo "<script>alert('Kindly fill all the fields')</script>";
 		}else{
-			$booking_query = "INSERT INTO `booking`(`first_name`, `last_name`, `date`, `time`, `phone`, `message`, `registered_time`) VALUES (:firstName, :lastName, :date, :time, :phone, :message)";
-			
-			$booking_prepare = $connection->prepare($booking_query);
-			$booking_prepare->bindParam(':firstName', $firstName);
-			$booking_prepare->bindParam(':firstName', $firstName);
-			$booking_prepare->bindParam(':firstName', $firstName);
-			$booking_prepare->bindParam(':firstName', $firstName);
-			$booking_prepare->bindParam(':firstName', $firstName);
-			$booking_prepare->bindParam(':firstName', $firstName);
-			$booking_prepare->bindParam(':firstName', $firstName);
-			$booking_prepare->bindParam(':firstName', $firstName);
+			if(isset($_SESSION['userId'])){
+				$booking_query = "INSERT INTO `booking`(`first_name`, `last_name`, `date`, `time`, `phone`, `message`, `booked_user_id`) VALUES (:firstName, :lastName, :date, :time, :phone, :message, :userId)";
+
+				$booking_prepare = $connection->prepare($booking_query);
+				$booking_prepare->bindParam(':firstName', $firstName);
+				$booking_prepare->bindParam(':lastName', $lastName);
+				$booking_prepare->bindParam(':date', $date);
+				$booking_prepare->bindParam(':time', $time);
+				$booking_prepare->bindParam(':phone', $phone);
+				$booking_prepare->bindParam(':message', $message);
+				$booking_prepare->bindParam(':userId', $_SESSION['userId']);
+				$booking_prepare->execute();
+			}else{
+				echo "<script>alert('Kindly Login to book a table')</script>";
+			}
 		}
 	}
 ?>
@@ -114,7 +118,7 @@
 		    				<div class="form-group">
 		    					<div class="input-wrap">
 		            		<div class="icon"><span class="ion-md-calendar"></span></div>
-		            		<input type="text" name="date" class="form-control appointment_date" placeholder="Date">
+		            		<input type="text" name="date" data-date-start-date = "+1d" class="form-control appointment_date" placeholder="Date">
 	            		</div>
 		    				</div>
 		    				<div class="form-group ml-md-4">
