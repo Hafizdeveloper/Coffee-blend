@@ -1,4 +1,16 @@
 <?php include "header/nav.php" ?>
+<?php include "config/config.php" ?>
+<?php
+	// FOR SINGLE PRODUCT
+	
+	$prodId = $_GET['prodId'];
+	$single_product_query = "SELECT * FROM `products` WHERE prod_id = :prodId";
+	$single_product_prepare = $connection->prepare($single_product_query);
+	$single_product_prepare->bindParam(':prodId', $prodId);
+	$single_product_prepare->execute();
+	$single_product = $single_product_prepare->fetch(PDO::FETCH_ASSOC);
+	print_r($single_product);
+?>
 
     <section class="home-slider owl-carousel">
       <div class="slider-item" style="background-image: url(images/bg_3.jpg);" data-stellar-background-ratio="0.5">
