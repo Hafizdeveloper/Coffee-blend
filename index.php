@@ -7,7 +7,7 @@
 	$product_fetch_prepare = $connection->prepare($product_fetch_query);
 	$product_fetch_prepare->execute();
 	$product_fetch = $product_fetch_prepare->fetchAll(PDO::FETCH_ASSOC);
-	print_r($product_fetch);
+	// print_r($product_fetch);
 
 	if(isset($_POST['book'])){
 		$firstName = $_POST['firstName'];
