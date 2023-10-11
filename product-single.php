@@ -18,7 +18,32 @@
 	$related_products_prepare->bindParam(':category', $single_product['prod_categories']);
 	$related_products_prepare->execute();
 	$related_products = $related_products_prepare->fetchAll(PDO::FETCH_ASSOC);
-	print_r($related_products);
+	// print_r($related_products);
+
+	// ADD TO CART START
+	
+	if(isset($_POST['cart'])){
+		if(isset($_SESSION['userId'])){
+			$price_input = $_POST['priceInput'];
+			$size = $_POST['size'];
+			$quantity = $_POST['quantity'];
+
+			$cart_query = "INSERT INTO `cart`(`prod_name`, `prod_description`, `prod_price`, `prod_quantity`, `prod_size`, `prod_image`, `cart_user_id`) VALUES (:prodName, :prodDescription, :prodPrice, :prodQuantity, :prodSize, :prodImage, :cartUser)";
+			$cart_prepare = $connection->prepare($cart_query);
+			$cart_prepare->bindParam(':prodName',$single_product['prod_name']);
+			$cart_prepare->bindParam(':prodDescription',$single_product['prod_description']);
+			$cart_prepare->bindParam(':prodPrice',$price_input);
+			$cart_prepare->bindParam(':prodQuantity',$quantity);
+			$cart_prepare->bindParam(':prodSize',$size);
+			$cart_prepare->bindParam(':prodImage',$single_product['prod_image']);
+			$cart_prepare->bindParam(':cartUser',$_SESSION['userId']);
+			$cart_prepare->execute();
+		}else{
+			echo "<script>alert('Kindly Login for Adding products into the cart')</script>";
+		}
+	}
+
+	// ADD TO CART END
 ?>
 
     <section class="home-slider owl-carousel">
@@ -45,14 +70,16 @@
     			</div>
     			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
     				<h3><?php echo $single_product['prod_name'] ?></h3>
-    				<p class="price"><span>$<?php echo $single_product['prod_price'] ?></span></p>
+    				<p class="price"><span id="price">$<?php echo $single_product['prod_price'] ?></span></p>
+					<form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+					<input type="hidden" name="priceInput" id="priceInput">
     				<p><?php echo $single_product['prod_description'] ?></p>
 						<div class="row mt-4">
 							<div class="col-md-6">
 								<div class="form-group d-flex">
 		              <div class="select-wrap">
 	                  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                  <select name="" id="size" class="form-control">
+	                  <select name="size" id="size" class="form-control">
 	                  	<option value="Small">Small</option>
 	                    <option value="Medium">Medium</option>
 	                    <option value="Large">Large</option>
@@ -75,8 +102,9 @@
 	                 </button>
 	             	</span>
 	          	</div>
-          	</div>
-          	<p><a href="cart.html" class="btn btn-primary py-3 px-5">Add to Cart</a></p>
+			</div>
+			<p><input type="submit" name="cart" value="add to cart" class="btn btn-primary py-3 px-5"></p>
+				</form>
     			</div>
     		</div>
     	</div>
@@ -148,8 +176,24 @@
 		});
 
 		const size = document.getElementById('size');
+		const price = document.getElementById('price');
+		const priceInput = document.getElementById('priceInput');
 		size.addEventListener('change', ()=>{
 			console.log(size.value);
+
+			if(size.value === 'Small'){
+				price.innerHTML = '$<?php echo $products['prod_price'] ?>';		
+				priceInput.value = '<?php echo $products['prod_price'] ?>';		
+			}else if(size.value === 'Medium'){
+				price.innerHTML = '$<?php echo $products['prod_price'] + 5 ?>';	
+				priceInput.value = '<?php echo $products['prod_price'] + 5?>';		
+			}else if(size.value === 'Large'){
+				price.innerHTML = '$<?php echo $products['prod_price'] + 10 ?>';		
+				priceInput.value = '<?php echo $products['prod_price'] + 10?>';		
+			}else if(size.value === 'eLarge'){
+				price.innerHTML = '$<?php echo $products['prod_price'] + 15 ?>';	
+				priceInput.value = '<?php echo $products['prod_price'] + 15 ?>';		
+			}
 		})
 	</script>
 
